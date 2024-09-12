@@ -1,6 +1,4 @@
-;; Honor Pledge (bottom too) FILL IN NAME:
-;;
-;; I Fiona Azumah submit this assignment as my own work
+
 #lang racket
 (provide (all-defined-out))
 
@@ -19,9 +17,6 @@
 ;; CIS352 (Fall 22) Project 2 -- Network Connectivity
 ;; 
 
-;; To see the demo, invoke using:
-;;     racket connectivity.rkt <input-file>.net
-;;     racket connectivity.rkt <input-file>.net "CONNECTED <from> <to>"
 
 ;; Lines are pared into an intermediate representation satisfying the
 ;; line? predicate.
@@ -45,17 +40,8 @@
                                  (hash-keys gr))))
 
 
-;; 
-;; BEGIN PROJECT BELOW
-;; 
 
-;; TODO
-;; Parse a line of text input. Lines will have the following format:
-;;     NODE <node-name>
-;;     LINK <node-name> <node-name>
-;; 
-;; Hint: use string-split and match, make sure to produce something
-;; that adheres to `line?`.
+
 (define/contract (parse-line l)
   (-> string? line?)
   ;; pieces is a list of strings
@@ -67,21 +53,18 @@
      (list 'link n1 n2)]
     [_ (error "Invalid Input")]))
 
-;; starter code
 ;; read a file by mapping over its lines  
 (define/contract (read-file f)
   (-> string? input-format?)
   (map parse-line (file->lines f)))
 
-;; TODO 
-;; Input is a list of line? commands. Write a recursive function which
-;; builds up a hash.
-;; 
+
+
+
+(define/contract (build-init-graph input)
+;; builds up a hash
 ;; - If it's a `node` command, add a link from a node to itself.
 ;; - If it's a `link` command, add a directional link as specified.
-;;
-;; Hint: use (hash), (set n), hash-set, set-add, hash-ref, and similar.
-(define/contract (build-init-graph input)
   (-> input-format? graph?)
   (define (read-line input graph)
     (if (empty? input)
@@ -98,40 +81,27 @@
             [_ (error "Invalid Input")]))))
   (read-line input (hash)))
  
-;; TODO
+
+(define (forward-link? graph n0 n1)
 ;; Check whether or not there is a forward line from n0 to n1 in
 ;; graph.
-;; 
-;; Hint: use set-member? and hash-ref
-(define (forward-link? graph n0 n1)
   ;; first, look up the set of nodes which are adjacent to (i.e., neighbors of) n0
   ;; then, check if n1 is a member of that set
   (define set-of-nodes (list->set (hash-ref graph n0)))
   (set-member? set-of-nodes n1))
-;; TODO
+
+
+(define (add-link graph from to)
 ;; Add a directed link (from,to) to the graph graph, return the new graph with 
 ;; the additional link.
-;;
-;; Hint: use hash-set, hash-ref, and set-add.
-(define (add-link graph from to)
   (hash-set graph
             from
             (set-add (hash-ref graph from (set))
                      to)))
 
-;; TODO
-;; Perform the transitive closure of the graph. This is the most challenging 
-;; operation in the project, so we recommend putting it off until the end.
-;; 
-;; To perform the transitive closure of the graph, iteratively add links
-;; whenever you find a matching (x,y) and (y,z). This can be done in one of 
-;; two broad ways: (a) chaotic iteration or (b) semi-naive evaluation. 
-;; Read the project description for more details and hints at a solution.
-;; 
-;; My solution uses `foldl`, `hash-keys`, `set->list`, `hash-ref`, and 
-;; `add-link`. It is always possible to use a recursive helper function instead
-;; of a foldl, but it makes the code much easier to understand in my opinion.
 (define (transitive-closure graph)
+;; Perform the transitive closure of the graph. Iteratively adding links
+;; whenever there is a matching (x,y) and (y,z).
   (define (one-step-transitive graph)
     (foldl (lambda (n0 graph)
              (foldl (lambda (n1 graph)
@@ -155,9 +125,6 @@
 
 
 
-;;
-;; END PROJECT CODE, DO NOT TOUCH BELOW
-;;
 
 ;; Print a DB
 (define (print-db db)
