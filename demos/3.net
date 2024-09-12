@@ -1,0 +1,10 @@
+NODE main-server
+NODE backup-srv
+NODE switch
+NODE db-server
+LINK main-server switch
+LINK switch main-server
+LINK switch backup-srv
+LINK backup-srv switch
+LINK db-server switch
+LINK switch db-server

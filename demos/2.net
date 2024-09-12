@@ -1,0 +1,5 @@
+NODE node0
+NODE node1
+NODE node2
+LINK node0 node1
+LINK node1 node2

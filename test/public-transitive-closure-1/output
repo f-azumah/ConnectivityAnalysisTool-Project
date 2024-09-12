@@ -1,0 +1,32 @@
+Key n0:
+    n0, n1, n3, n5
+Key n1:
+    n0, n1, n2, n3
+Key n2:
+    n2, n3, n4, n5, n6
+Key n3:
+    n0, n1, n2, n3
+Key n4:
+    n4, n6, n7
+Key n5:
+    n5
+Key n6:
+    n4, n6, n7
+Key n7:
+    n0, n7
+Key n0:
+    n0, n1, n2, n3, n4, n5, n6, n7
+Key n1:
+    n0, n1, n2, n3, n4, n5, n6, n7
+Key n2:
+    n0, n1, n2, n3, n4, n5, n6, n7
+Key n3:
+    n0, n1, n2, n3, n4, n5, n6, n7
+Key n4:
+    n0, n1, n2, n3, n4, n5, n6, n7
+Key n5:
+    n5
+Key n6:
+    n0, n1, n2, n3, n4, n5, n6, n7
+Key n7:
+    n0, n1, n2, n3, n4, n5, n6, n7

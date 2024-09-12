@@ -1,0 +1,3 @@
+NODE node0-name
+NODE node1-name
+LINK node0-name node1-name

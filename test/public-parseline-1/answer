@@ -1,0 +1,7 @@
+(node n0)
+(node n1)
+(node n2)
+(node n3)
+(link n0 n1)
+(link n2 n3)
+(link n3 n1)
